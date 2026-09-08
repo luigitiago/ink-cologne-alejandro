@@ -1,36 +1,47 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Pura Vida Tattoo — Alejandro Borrelli · Köln',
+  description:
+    'Pura Vida Tattoo — Studio von Alejandro Borrelli in der Eifelstraße 20, Köln. Individuelle Tattoos in Blackwork, Fine Line, Realismus und Old School. Tattoo studio in Cologne, Germany.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+  keywords: [
+    'Tattoo Köln',
+    'Tattoo Cologne',
+    'Pura Vida Tattoo',
+    'Alejandro Borrelli',
+    'Blackwork',
+    'Fine Line',
+    'Old School Tattoo',
+    'Eifelstraße',
+  ],
+  openGraph: {
+    title: 'Pura Vida Tattoo — Alejandro Borrelli · Köln',
+    description:
+      'Individuelle Tattoos in Köln. Blackwork, Fine Line, Realismus & Old School. Studio in der Eifelstraße 20.',
+    type: 'website',
+    locale: 'de_DE',
   },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  colorScheme: 'light',
+  themeColor: '#eae4d6',
 }
 
 export default function RootLayout({
@@ -39,8 +50,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="de" className={`light ${playfair.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased bg-background">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
